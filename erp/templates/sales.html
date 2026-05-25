@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Sales Module</title>
+    <title>Sales Module | CM ERP</title>
 
     <!-- Bootstrap -->
 
@@ -26,185 +26,626 @@
     crossorigin>
 
     <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
 
-        body{
-            background: #f1f5f9;
-            font-family: 'Poppins', sans-serif;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
+
+        body{
+
+            background:#f8fafc;
+
+            font-family:'Inter',sans-serif;
+
+            color:#0f172a;
+
+        }
+
+        /* SIDEBAR */
 
         .sidebar{
-            width: 260px;
-            height: 100vh;
-            background: #0f172a;
-            color: white;
-            position: fixed;
-            padding: 25px;
+
+            width:280px;
+
+            height:100vh;
+
+            position:fixed;
+
+            top:0;
+
+            left:0;
+
+            background:
+            linear-gradient(
+                180deg,
+                #ffffff,
+                #f8fafc
+            );
+
+            border-right:1px solid #e2e8f0;
+
+            padding:28px 20px;
+
+            overflow-y:auto;
+
+            z-index:1000;
+
         }
 
-        .sidebar h2{
-            font-weight: 700;
-            margin-bottom: 40px;
+        .logo{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:14px;
+
+            margin-bottom:40px;
+
+        }
+
+        .logo-icon{
+
+            width:55px;
+
+            height:55px;
+
+            border-radius:18px;
+
+            background:
+            linear-gradient(
+                135deg,
+                #16a34a,
+                #22c55e
+            );
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            color:white;
+
+            font-size:24px;
+
+            box-shadow:
+            0px 10px 20px rgba(34,197,94,0.20);
+
+        }
+
+        .logo-text h2{
+
+            font-size:22px;
+
+            font-weight:800;
+
+            margin-bottom:2px;
+
+            color:#0f172a;
+
+        }
+
+        .logo-text p{
+
+            margin:0;
+
+            font-size:13px;
+
+            color:#64748b;
+
+        }
+
+        .menu-title{
+
+            font-size:12px;
+
+            font-weight:700;
+
+            color:#94a3b8;
+
+            margin-bottom:15px;
+
+            text-transform:uppercase;
+
+            letter-spacing:1px;
+
         }
 
         .sidebar a{
-            display: block;
-            color: white;
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            transition: 0.3s;
-            font-weight: 500;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:14px;
+
+            text-decoration:none;
+
+            padding:14px 16px;
+
+            border-radius:16px;
+
+            margin-bottom:12px;
+
+            color:#334155;
+
+            font-weight:600;
+
+            transition:0.3s ease;
+
+        }
+
+        .sidebar a i{
+
+            font-size:18px;
+
         }
 
         .sidebar a:hover{
-            background: #1e293b;
+
+            background:#16a34a;
+
+            color:white;
+
+            transform:translateX(4px);
+
         }
+
+        /* MAIN */
 
         .main-content{
-            margin-left: 280px;
-            padding: 30px;
+
+            margin-left:280px;
+
+            padding:30px;
+
         }
 
-        .card-box{
-            background: white;
-            padding: 35px;
-            border-radius: 22px;
-            box-shadow: 0px 8px 25px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
+        /* HEADER */
+
+        .top-header{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            flex-wrap:wrap;
+
+            gap:20px;
+
+            margin-bottom:28px;
+
         }
 
-        .title{
-            font-size: 30px;
-            font-weight: 700;
-            color: #0f172a;
-            margin-bottom: 10px;
+        .page-title{
+
+            font-size:34px;
+
+            font-weight:800;
+
+            color:#0f172a;
+
+            margin-bottom:6px;
+
         }
 
-        .subtitle{
-            color: gray;
-            margin-bottom: 30px;
-        }
+        .page-subtitle{
 
-        label{
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #0f172a;
-        }
+            color:#64748b;
 
-        input,
-        textarea,
-        select{
-            width: 100%;
-            padding: 13px;
-            border-radius: 12px;
-            border: 1px solid #cbd5e1;
-            margin-bottom: 20px;
-            outline: none;
-        }
+            font-size:15px;
 
-        input:focus,
-        textarea:focus,
-        select:focus{
-            border-color: #16a34a;
-            box-shadow: 0px 0px 5px rgba(22,163,74,0.4);
-        }
-
-        .submit-btn{
-            width: 100%;
-            background: #16a34a;
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .submit-btn:hover{
-            background: #15803d;
-        }
-
-        table{
-            width: 100%;
-        }
-
-        th{
-            background: #0f172a !important;
-            color: white !important;
-            text-align: center;
-        }
-
-        td{
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        th, td{
-            padding: 14px;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .stock-badge{
-            background: #16a34a;
-            color: white;
-            padding: 7px 14px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        .top-card{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 25px;
         }
 
         .erp-badge{
-            background: #0f172a;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
+
+            background:white;
+
+            border:1px solid #e2e8f0;
+
+            padding:14px 20px;
+
+            border-radius:18px;
+
+            font-size:14px;
+
+            font-weight:700;
+
+            color:#16a34a;
+
+            box-shadow:
+            0px 6px 18px rgba(15,23,42,0.05);
+
         }
+
+        /* CARD */
+
+        .card-box{
+
+            background:white;
+
+            border-radius:28px;
+
+            padding:28px;
+
+            margin-bottom:28px;
+
+            border:1px solid #e2e8f0;
+
+            box-shadow:
+            0px 10px 30px rgba(15,23,42,0.05);
+
+        }
+
+        .card-title{
+
+            font-size:24px;
+
+            font-weight:700;
+
+            color:#0f172a;
+
+            margin-bottom:6px;
+
+        }
+
+        .card-subtitle{
+
+            color:#64748b;
+
+            margin-bottom:25px;
+
+        }
+
+        /* TABLE */
+
+        .table{
+
+            margin-bottom:0;
+
+        }
+
+        .table thead th{
+
+            background:#f1f5f9;
+
+            border:none;
+
+            color:#334155;
+
+            font-size:14px;
+
+            font-weight:700;
+
+            padding:16px;
+
+            text-align:center;
+
+        }
+
+        .table tbody td{
+
+            padding:16px;
+
+            text-align:center;
+
+            vertical-align:middle;
+
+            border-color:#f1f5f9;
+
+            font-weight:500;
+
+        }
+
+        .stock-badge{
+
+            background:#dcfce7;
+
+            color:#166534;
+
+            padding:8px 16px;
+
+            border-radius:30px;
+
+            font-size:14px;
+
+            font-weight:700;
+
+        }
+
+        /* FORM */
+
+        label{
+
+            font-weight:600;
+
+            margin-bottom:10px;
+
+            color:#334155;
+
+            font-size:14px;
+
+        }
+
+        .form-control,
+        .form-select{
+
+            height:56px;
+
+            border-radius:16px;
+
+            border:1px solid #dbe2ea;
+
+            background:#fcfcfc;
+
+            padding:12px 16px;
+
+            font-size:15px;
+
+            box-shadow:none;
+
+            margin-bottom:22px;
+
+        }
+
+        textarea.form-control{
+
+            height:auto;
+
+            min-height:120px;
+
+            resize:none;
+
+        }
+
+        .form-control:focus,
+        .form-select:focus{
+
+            border-color:#86efac;
+
+            box-shadow:
+            0px 0px 0px 4px rgba(34,197,94,0.10);
+
+        }
+
+        /* TOTAL BOX */
 
         .total-box{
-            background: #dcfce7;
-            padding: 18px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            text-align: center;
+
+            background:
+            linear-gradient(
+                135deg,
+                #dcfce7,
+                #f0fdf4
+            );
+
+            padding:24px;
+
+            border-radius:22px;
+
+            text-align:center;
+
+            margin-bottom:30px;
+
+            border:1px solid #bbf7d0;
+
         }
 
-        .total-box h3{
-            color: #166534;
-            margin: 0;
-            font-weight: 700;
+        .total-box p{
+
+            margin-bottom:8px;
+
+            color:#166534;
+
+            font-weight:600;
+
         }
+
+        .total-box h2{
+
+            font-size:38px;
+
+            font-weight:800;
+
+            color:#15803d;
+
+            margin:0;
+
+        }
+
+        /* BUTTON */
+
+        .submit-btn{
+
+            width:100%;
+
+            height:58px;
+
+            border:none;
+
+            border-radius:18px;
+
+            background:
+            linear-gradient(
+                135deg,
+                #16a34a,
+                #22c55e
+            );
+
+            color:white;
+
+            font-size:17px;
+
+            font-weight:700;
+
+            transition:0.3s ease;
+
+            margin-top:10px;
+
+            box-shadow:
+            0px 12px 25px rgba(34,197,94,0.18);
+
+        }
+
+        .submit-btn:hover{
+
+            transform:translateY(-3px);
+
+            box-shadow:
+            0px 18px 30px rgba(34,197,94,0.28);
+
+        }
+
+        /* ALERT */
 
         .alert{
-            border-radius: 14px;
-            font-weight: 500;
+
+            border:none;
+
+            border-radius:18px;
+
+            padding:16px;
+
+            font-weight:600;
+
+            box-shadow:
+            0px 8px 20px rgba(0,0,0,0.04);
+
         }
 
-        @media(max-width:768px){
+        /* MOBILE NAVBAR */
+
+        .mobile-topbar{
+
+            display:none;
+
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:991px){
 
             .sidebar{
-                width: 100%;
-                height: auto;
-                position: relative;
+
+                left:-100%;
+
+                transition:0.3s ease;
+
+            }
+
+            .sidebar.active{
+
+                left:0;
+
             }
 
             .main-content{
-                margin-left: 0;
-                padding: 15px;
+
+                margin-left:0;
+
+                padding:20px;
+
+            }
+
+            .mobile-topbar{
+
+                display:flex;
+
+                justify-content:space-between;
+
+                align-items:center;
+
+                background:white;
+
+                padding:16px 20px;
+
+                border-radius:20px;
+
+                margin-bottom:20px;
+
+                box-shadow:
+                0px 6px 20px rgba(15,23,42,0.06);
+
+            }
+
+            .menu-btn{
+
+                width:48px;
+
+                height:48px;
+
+                border:none;
+
+                border-radius:14px;
+
+                background:#16a34a;
+
+                color:white;
+
+                font-size:20px;
+
+            }
+
+            .page-title{
+
+                font-size:28px;
+
+            }
+
+        }
+
+        @media(max-width:576px){
+
+            .main-content{
+
+                padding:15px;
+
+            }
+
+            .card-box{
+
+                padding:20px;
+
+                border-radius:22px;
+
+            }
+
+            .page-title{
+
+                font-size:24px;
+
+            }
+
+            .card-title{
+
+                font-size:22px;
+
+            }
+
+            .table-responsive{
+
+                border-radius:18px;
+
+            }
+
+            .total-box h2{
+
+                font-size:28px;
+
             }
 
         }
@@ -215,65 +656,101 @@
 
 <body>
 
-    <!-- Sidebar -->
+    <!-- SIDEBAR -->
 
-    <div class="sidebar">
+    <div class="sidebar"
+         id="sidebar">
 
-        <h2>
-            CM ERP
-        </h2>
+        <div class="logo">
 
-        <a href="/sales">
+            <div class="logo-icon">
 
-            ➕ New Sales
+                <i class="bi bi-bar-chart-fill"></i>
+
+            </div>
+
+            <div class="logo-text">
+
+                <h2>CM ERP</h2>
+
+                <p>Sales Management</p>
+
+            </div>
+
+        </div>
+
+        <div class="menu-title">
+
+            Navigation
+
+        </div>
+
+        <a href="/sales/">
+
+            <i class="bi bi-plus-circle-fill"></i>
+
+            New Sales
 
         </a>
 
-        <a href="/stock">
+        <a href="/stock/">
 
-            📦 Stock Overview
+            <i class="bi bi-box-seam-fill"></i>
 
-        </a>
-
-        <a href="/sales-details">
-
-            📄 Sales Details
+            Stock Overview
 
         </a>
 
-        <a href="/dashboard">
+        <a href="/sales-details/">
 
-            📊 Dashboard
+            <i class="bi bi-receipt-cutoff"></i>
+
+            Sales Details
 
         </a>
 
-        <a href="/raw-material">
+        <a href="/">
 
-            🏭 Raw Material
+            <i class="bi bi-box-arrow-right"></i>
+
+            Logout
 
         </a>
 
     </div>
 
-    <!-- Main Content -->
+    <!-- MAIN CONTENT -->
 
     <div class="main-content">
 
-        <!-- SUCCESS MESSAGE -->
+        <!-- MOBILE TOPBAR -->
+
+        <div class="mobile-topbar">
+
+            <h5 class="m-0 fw-bold">
+
+                CM ERP
+
+            </h5>
+
+            <button class="menu-btn"
+                    onclick="toggleSidebar()">
+
+                <i class="bi bi-list"></i>
+
+            </button>
+
+        </div>
+
+        <!-- ALERT -->
 
         {% if messages %}
 
             {% for message in messages %}
 
-                <div class="alert alert-success alert-dismissible fade show">
+                <div class="alert alert-success">
 
                     {{ message }}
-
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert">
-                    </button>
 
                 </div>
 
@@ -281,75 +758,97 @@
 
         {% endif %}
 
-        <!-- STOCK OVERVIEW -->
+        <!-- HEADER -->
 
-        <div class="card-box">
+        <div class="top-header">
 
-            <div class="top-card">
+            <div>
 
-                <div>
+                <h1 class="page-title">
 
-                    <h2 class="title">
+                    Sales Dashboard
 
-                        Available Stock
+                </h1>
 
-                    </h2>
+                <p class="page-subtitle">
 
-                    <p class="subtitle">
+                    Manage customer sales and stock entries
 
-                        Live Product Stock Overview
-
-                    </p>
-
-                </div>
-
-                <div class="erp-badge">
-
-                    CM Cattle Feed ERP
-
-                </div>
+                </p>
 
             </div>
 
-            <table class="table table-bordered">
+            <div class="erp-badge">
 
-                <tr>
+                CM Cattle Feed ERP
 
-                    <th>
-                        Product Name
-                    </th>
+            </div>
 
-                    <th>
-                        Available Stock
-                    </th>
+        </div>
 
-                </tr>
+        <!-- STOCK TABLE -->
 
-                {% for product in products %}
+        <div class="card-box">
 
-                <tr>
+            <h2 class="card-title">
 
-                    <td>
+                Available Stock
 
-                        {{ product.name }}
+            </h2>
 
-                    </td>
+            <p class="card-subtitle">
 
-                    <td>
+                Live product inventory overview
 
-                        <span class="stock-badge">
+            </p>
 
-                            {{ product.stock }} Bags
+            <div class="table-responsive">
 
-                        </span>
+                <table class="table align-middle">
 
-                    </td>
+                    <thead>
 
-                </tr>
+                        <tr>
 
-                {% endfor %}
+                            <th>Product Name</th>
 
-            </table>
+                            <th>Available Stock</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for product in products %}
+
+                        <tr>
+
+                            <td>
+
+                                {{ product.name }}
+
+                            </td>
+
+                            <td>
+
+                                <span class="stock-badge">
+
+                                    {{ product.stock }} Bags
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
@@ -357,28 +856,29 @@
 
         <div class="card-box">
 
-            <h1 class="title">
+            <h2 class="card-title">
 
                 New Sales Entry
 
-            </h1>
+            </h2>
 
-            <p class="subtitle">
+            <p class="card-subtitle">
 
-                Add New Customer Sales Details
+                Add customer sales information
 
             </p>
 
-            <!-- TOTAL BOX -->
+            <!-- TOTAL -->
 
             <div class="total-box">
 
-                <h3>
+                <p>Total Amount</p>
 
-                    Total Amount:
+                <h2>
+
                     ₹ <span id="total_amount">0</span>
 
-                </h3>
+                </h2>
 
             </div>
 
@@ -386,128 +886,184 @@
 
                 {% csrf_token %}
 
-                <!-- Date -->
+                <div class="row">
 
-                <label>Date</label>
+                    <div class="col-lg-6">
 
-                <input type="date"
-                       name="date"
-                       required>
+                        <label>Date</label>
 
-                <!-- RD Name -->
+                        <input type="date"
+                               name="date"
+                               class="form-control"
+                               required>
 
-                <label>RD Name</label>
+                    </div>
 
-                <input type="text"
-                       name="rd_name"
-                       placeholder="Enter RD Name"
-                       required>
+                    <div class="col-lg-6">
 
-                <!-- Retail Partner -->
+                        <label>RD Name</label>
 
-                <label>Retail Partner Name</label>
+                        <input type="text"
+                               name="rd_name"
+                               class="form-control"
+                               placeholder="Enter RD Name"
+                               required>
 
-                <input type="text"
-                       name="retail_partner"
-                       placeholder="Enter Retail Partner Name"
-                       required>
+                    </div>
 
-                <!-- Mobile -->
+                    <div class="col-lg-6">
 
-                <label>Mobile Number</label>
+                        <label>Retail Partner</label>
 
-                <input type="text"
-                       name="mobile"
-                       maxlength="10"
-                       placeholder="Enter Mobile Number"
-                       required>
+                        <input type="text"
+                               name="retail_partner"
+                               class="form-control"
+                               placeholder="Retail Partner Name"
+                               required>
 
-                <!-- Address -->
+                    </div>
 
-                <label>Address</label>
+                    <div class="col-lg-6">
 
-                <textarea name="address"
-                          rows="3"
-                          placeholder="Enter Address"
-                          required></textarea>
+                        <label>Mobile Number</label>
 
-                <!-- Product -->
+                        <input type="text"
+                               name="mobile"
+                               maxlength="10"
+                               class="form-control"
+                               placeholder="Enter Mobile Number"
+                               required>
 
-                <label>Product</label>
+                    </div>
 
-                <select name="product" required>
+                    <div class="col-lg-6">
 
-                    <option value="">
-                        Select Product
-                    </option>
+                        <label>Customer Name</label>
 
-                    {% for product in products %}
+                        <input type="text"
+                               name="customer_name"
+                               class="form-control"
+                               placeholder="Enter Customer Name"
+                               required>
 
-                    <option value="{{ product.id }}">
+                    </div>
 
-                        {{ product.name }}
+                    <div class="col-lg-6">
 
-                    </option>
+                        <label>Sales Person</label>
 
-                    {% endfor %}
+                        <input type="text"
+                               name="sales_person_name"
+                               class="form-control"
+                               placeholder="Enter Sales Person Name"
+                               required>
 
-                </select>
+                    </div>
 
-                <!-- Bag Count -->
+                    <div class="col-12">
 
-                <label>Bag Count</label>
+                        <label>Address</label>
 
-                <input type="number"
-                       name="bag_count"
-                       id="bag_count"
-                       placeholder="Enter Bag Count"
-                       required>
+                        <textarea name="address"
+                                  class="form-control"
+                                  rows="4"
+                                  placeholder="Enter Customer Address"
+                                  required></textarea>
 
-                <!-- Unit Price -->
+                    </div>
 
-                <label>Unit Price</label>
+                    <div class="col-lg-6">
 
-                <input type="number"
-                       name="unit_price"
-                       id="unit_price"
-                       placeholder="Enter Unit Price"
-                       required>
+                        <label>Collected Payment</label>
 
-                <!-- Payment -->
+                        <input type="number"
+                               step="0.01"
+                               name="collected_payment"
+                               class="form-control"
+                               placeholder="Enter Collected Amount"
+                               required>
 
-                <label>Payment Term</label>
+                    </div>
 
-                <select name="payment_term"
-                        required>
+                    <div class="col-lg-6">
 
-                    <option value="">
-                        Select Payment
-                    </option>
+                        <label>Due Amount</label>
 
-                    <option value="Cash">
-                        Cash
-                    </option>
+                        <input type="number"
+                               step="0.01"
+                               name="due"
+                               class="form-control"
+                               placeholder="Enter Due Amount"
+                               required>
 
-                    <option value="GPay">
-                        GPay
-                    </option>
+                    </div>
 
-                    <option value="Bank Transfer">
-                        Bank Transfer
-                    </option>
+                    <div class="col-lg-6">
 
-                    <option value="Credit">
-                        Credit
-                    </option>
+                        <label>Product</label>
 
-                </select>
+                        <select name="product"
+                                class="form-select"
+                                required>
 
-                <button type="submit"
-                        class="submit-btn">
+                            <option value="">
 
-                    Submit Sale
+                                Select Product
 
-                </button>
+                            </option>
+
+                            {% for product in products %}
+
+                            <option value="{{ product.id }}">
+
+                                {{ product.name }}
+
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-lg-3">
+
+                        <label>Bag Count</label>
+
+                        <input type="number"
+                               name="bag_count"
+                               id="bag_count"
+                               class="form-control"
+                               placeholder="0"
+                               required>
+
+                    </div>
+
+                    <div class="col-lg-3">
+
+                        <label>Unit Price</label>
+
+                        <input type="number"
+                               name="unit_price"
+                               id="unit_price"
+                               class="form-control"
+                               placeholder="0"
+                               required>
+
+                    </div>
+
+                    <div class="col-12">
+
+                        <button type="submit"
+                                class="submit-btn">
+
+                            Submit Sale
+
+                        </button>
+
+                    </div>
+
+                </div>
 
             </form>
 
@@ -519,7 +1075,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- TOTAL AUTO CALCULATION -->
+    <!-- TOTAL CALCULATE -->
 
     <script>
 
@@ -534,16 +1090,14 @@
 
         function calculateTotal(){
 
-            let bags = parseFloat(
-                bagCount.value
-            ) || 0;
+            let bags =
+            parseFloat(bagCount.value) || 0;
 
-            let price = parseFloat(
-                unitPrice.value
-            ) || 0;
+            let price =
+            parseFloat(unitPrice.value) || 0;
 
             totalAmount.innerText =
-            bags * price;
+            (bags * price).toFixed(2);
 
         }
 
@@ -556,6 +1110,16 @@
             'input',
             calculateTotal
         );
+
+        /* MOBILE SIDEBAR */
+
+        function toggleSidebar(){
+
+            document
+            .getElementById('sidebar')
+            .classList.toggle('active');
+
+        }
 
     </script>
 

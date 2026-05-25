@@ -8,7 +8,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Admin Dashboard</title>
+    <title>
+        Modern Admin Dashboard
+    </title>
 
     <!-- Bootstrap -->
 
@@ -19,185 +21,534 @@
     <!-- Google Font -->
 
     <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
 
-        body{
-            background:#f1f5f9;
-            font-family:'Poppins',sans-serif;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
+
+        body{
+
+            background:#f8fafc;
+
+            font-family:'Inter',sans-serif;
+
+            overflow-x:hidden;
+
+        }
+
+        /* SIDEBAR */
 
         .sidebar{
-            width:260px;
+
+            width:270px;
+
             height:100vh;
-            background:#0f172a;
+
             position:fixed;
-            padding:25px;
-            color:white;
-        }
 
-        .sidebar h2{
-            margin-bottom:40px;
-            font-weight:700;
-        }
+            left:0;
 
-        .sidebar a{
-            display:block;
-            color:white;
-            text-decoration:none;
-            padding:14px;
-            border-radius:12px;
-            margin-bottom:15px;
+            top:0;
+
+            background:
+            linear-gradient(
+                180deg,
+                #0f172a,
+                #1e293b
+            );
+
+            padding:30px 22px;
+
+            z-index:999;
+
             transition:0.3s;
-            font-weight:500;
+
+            overflow-y:auto;
+
         }
 
-        .sidebar a:hover{
-            background:#1e293b;
+        .logo{
+
+            color:white;
+
+            font-size:28px;
+
+            font-weight:800;
+
+            margin-bottom:40px;
+
+            text-align:center;
+
         }
+
+        .menu-link{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:14px;
+
+            padding:15px 18px;
+
+            color:#cbd5e1;
+
+            text-decoration:none;
+
+            border-radius:16px;
+
+            margin-bottom:12px;
+
+            transition:0.3s ease;
+
+            font-weight:600;
+
+            font-size:15px;
+
+        }
+
+        .menu-link i{
+
+            font-size:18px;
+
+        }
+
+        .menu-link:hover{
+
+            background:rgba(255,255,255,0.08);
+
+            color:white;
+
+            transform:translateX(4px);
+
+        }
+
+        .active-link{
+
+            background:
+            linear-gradient(
+                135deg,
+                #2563eb,
+                #3b82f6
+            );
+
+            color:white;
+
+            box-shadow:
+            0px 10px 20px rgba(37,99,235,0.25);
+
+        }
+
+        /* MAIN */
 
         .main{
-            margin-left:280px;
+
+            margin-left:270px;
+
             padding:30px;
+
+            min-height:100vh;
+
         }
 
-        .card-box{
-            background:white;
-            padding:25px;
-            border-radius:20px;
-            box-shadow:0px 8px 25px rgba(0,0,0,0.08);
-            text-align:center;
-            transition:0.3s;
-        }
+        /* TOPBAR */
 
-        .card-box:hover{
-            transform:translateY(-5px);
-        }
+        .topbar{
 
-        .card-box h2{
-            font-size:38px;
-            font-weight:700;
-            margin-top:10px;
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:30px;
+
+            flex-wrap:wrap;
+
+            gap:15px;
+
         }
 
         .title{
+
             font-size:34px;
-            font-weight:700;
-            margin-bottom:10px;
+
+            font-weight:800;
+
             color:#0f172a;
+
         }
 
         .subtitle{
-            color:gray;
-            margin-bottom:30px;
+
+            color:#64748b;
+
+            margin-top:6px;
+
+            font-size:15px;
+
+        }
+
+        .profile-box{
+
+            background:white;
+
+            padding:12px 18px;
+
+            border-radius:18px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:12px;
+
+            box-shadow:
+            0px 8px 25px rgba(15,23,42,0.08);
+
+        }
+
+        .profile-icon{
+
+            width:45px;
+
+            height:45px;
+
+            border-radius:50%;
+
+            background:#2563eb;
+
+            color:white;
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            font-size:18px;
+
+        }
+
+        /* CARDS */
+
+        .dashboard-card{
+
+            padding:28px;
+
+            border-radius:26px;
+
+            color:white;
+
+            position:relative;
+
+            overflow:hidden;
+
+            transition:0.3s ease;
+
+            height:100%;
+
+        }
+
+        .dashboard-card:hover{
+
+            transform:translateY(-5px);
+
+        }
+
+        .dashboard-card::before{
+
+            content:"";
+
+            position:absolute;
+
+            width:160px;
+
+            height:160px;
+
+            background:rgba(255,255,255,0.12);
+
+            border-radius:50%;
+
+            top:-50px;
+
+            right:-50px;
+
+        }
+
+        .dashboard-card i{
+
+            font-size:42px;
+
+            margin-bottom:18px;
+
+        }
+
+        .dashboard-card h5{
+
+            font-size:16px;
+
+            opacity:0.9;
+
+        }
+
+        .dashboard-card h2{
+
+            font-size:38px;
+
+            font-weight:800;
+
+            margin-top:10px;
+
         }
 
         .sales-card{
-            background:linear-gradient(
+
+            background:
+            linear-gradient(
                 135deg,
                 #2563eb,
                 #1d4ed8
             );
-            color:white;
+
         }
 
         .product-card{
-            background:linear-gradient(
+
+            background:
+            linear-gradient(
                 135deg,
                 #16a34a,
                 #15803d
             );
-            color:white;
+
         }
 
         .production-card{
-            background:linear-gradient(
+
+            background:
+            linear-gradient(
                 135deg,
                 #f59e0b,
                 #d97706
             );
-            color:white;
+
         }
 
         .stock-card{
-            background:linear-gradient(
+
+            background:
+            linear-gradient(
                 135deg,
                 #9333ea,
                 #7e22ce
             );
-            color:white;
+
         }
 
-        .table-box{
+        /* TABLE */
+
+        .table-card{
+
             background:white;
-            padding:25px;
-            border-radius:20px;
-            box-shadow:0px 8px 25px rgba(0,0,0,0.08);
+
+            border-radius:28px;
+
+            padding:28px;
+
             margin-top:30px;
+
+            box-shadow:
+            0px 10px 30px rgba(15,23,42,0.06);
+
         }
 
-        table{
-            width:100%;
+        .table-title{
+
+            font-size:22px;
+
+            font-weight:700;
+
+            color:#0f172a;
+
+            margin-bottom:22px;
+
         }
 
-        th{
-            background:#0f172a !important;
-            color:white !important;
-            text-align:center;
+        .table{
+
+            margin-bottom:0;
+
         }
 
-        td{
-            text-align:center;
+        .table thead th{
+
+            background:#0f172a;
+
+            color:white;
+
+            border:none;
+
+            padding:16px;
+
+            font-size:14px;
+
+            white-space:nowrap;
+
+        }
+
+        .table td{
+
+            padding:16px;
+
             vertical-align:middle;
+
+            white-space:nowrap;
+
+        }
+
+        .badge-pending{
+
+            background:#fee2e2;
+
+            color:#b91c1c;
+
+            padding:8px 14px;
+
+            border-radius:30px;
+
+            font-size:13px;
+
+            font-weight:700;
+
+        }
+
+        .badge-approved{
+
+            background:#dcfce7;
+
+            color:#166534;
+
+            padding:8px 14px;
+
+            border-radius:30px;
+
+            font-size:13px;
+
+            font-weight:700;
+
         }
 
         .approve-btn{
-            background:#16a34a;
+
+            border:none;
+
+            background:
+            linear-gradient(
+                135deg,
+                #16a34a,
+                #22c55e
+            );
+
             color:white;
-            padding:8px 15px;
-            border-radius:10px;
-            text-decoration:none;
+
+            padding:10px 16px;
+
+            border-radius:12px;
+
+            font-size:14px;
+
             font-weight:600;
+
+            text-decoration:none;
+
+            transition:0.3s;
+
         }
 
         .approve-btn:hover{
-            background:#15803d;
+
+            transform:translateY(-2px);
+
             color:white;
-        }
 
-        .approved-badge{
-            background:#dcfce7;
-            color:#166534;
-            padding:7px 14px;
-            border-radius:20px;
-            font-weight:600;
-        }
-
-        .pending-badge{
-            background:#fee2e2;
-            color:#991b1b;
-            padding:7px 14px;
-            border-radius:20px;
-            font-weight:600;
         }
 
         .alert{
-            border-radius:14px;
+
+            border:none;
+
+            border-radius:18px;
+
+            padding:16px;
+
         }
 
-        @media(max-width:768px){
+        .mobile-toggle{
+
+            display:none;
+
+            position:fixed;
+
+            top:20px;
+
+            left:20px;
+
+            z-index:1200;
+
+            background:#2563eb;
+
+            border:none;
+
+            color:white;
+
+            width:48px;
+
+            height:48px;
+
+            border-radius:14px;
+
+            font-size:22px;
+
+        }
+
+        @media(max-width:991px){
 
             .sidebar{
-                width:100%;
-                height:auto;
-                position:relative;
+
+                left:-100%;
+
+            }
+
+            .sidebar.active{
+
+                left:0;
+
             }
 
             .main{
+
                 margin-left:0;
-                padding:15px;
+
+                padding:90px 18px 20px;
+
+            }
+
+            .mobile-toggle{
+
+                display:block;
+
             }
 
         }
@@ -208,57 +559,87 @@
 
 <body>
 
-    <!-- Sidebar -->
+    <!-- MOBILE MENU -->
 
-    <div class="sidebar">
+    <button class="mobile-toggle"
+            onclick="toggleSidebar()">
 
-        <h2>
-            Admin Panel
-        </h2>
+        <i class="bi bi-list"></i>
 
-        <a href="/dashboard">
+    </button>
 
-            📊 Dashboard
+    <!-- SIDEBAR -->
 
-        </a>
+    <div class="sidebar"
+         id="sidebar">
 
-        <a href="/sales-details">
+        <div class="logo">
 
-            📄 Sales Details
+            CM ERP
 
-        </a>
+        </div>
 
-        <a href="/stock">
+        <a href="/dashboard"
+           class="menu-link active-link">
 
-            📦 Current Stock
+            <i class="bi bi-grid-fill"></i>
 
-        </a>
-
-        <a href="/production">
-
-            🏭 Production
+            Dashboard
 
         </a>
 
-        <a href="/raw-material">
+        <a href="/sales-details"
+           class="menu-link">
 
-            🧪 Raw Materials
+            <i class="bi bi-file-earmark-text"></i>
+
+            Sales Details
 
         </a>
 
-        <a href="/sales">
+        <a href="/stock"
+           class="menu-link">
 
-            ➕ New Sales
+            <i class="bi bi-box-seam"></i>
+
+            Current Stock
+
+        </a>
+
+        <a href="/production"
+           class="menu-link">
+
+            <i class="bi bi-building"></i>
+
+            Production
+
+        </a>
+
+        <a href="/raw-material"
+           class="menu-link">
+
+            <i class="bi bi-droplet-half"></i>
+
+            Raw Materials
+
+        </a>
+
+        <a href="/sales"
+           class="menu-link">
+
+            <i class="bi bi-plus-circle"></i>
+
+            New Sales
 
         </a>
 
     </div>
 
-    <!-- Main -->
+    <!-- MAIN -->
 
     <div class="main">
 
-        <!-- SUCCESS MESSAGE -->
+        <!-- ALERT -->
 
         {% if messages %}
 
@@ -268,10 +649,10 @@
 
                     {{ message }}
 
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert">
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="alert">
+
                     </button>
 
                 </div>
@@ -280,25 +661,63 @@
 
         {% endif %}
 
-        <h1 class="title">
-            CM Cattle Feed ERP
-        </h1>
+        <!-- TOPBAR -->
 
-        <p class="subtitle">
+        <div class="topbar">
 
-            Complete Admin Monitoring Dashboard
+            <div>
 
-        </p>
+                <h1 class="title">
 
-        <!-- TOP CARDS -->
+                    Admin Dashboard
+
+                </h1>
+
+                <p class="subtitle">
+
+                    Modern ERP Monitoring System
+
+                </p>
+
+            </div>
+
+            <div class="profile-box">
+
+                <div class="profile-icon">
+
+                    <i class="bi bi-person-fill"></i>
+
+                </div>
+
+                <div>
+
+                    <h6 class="mb-0 fw-bold">
+
+                        Administrator
+
+                    </h6>
+
+                    <small class="text-muted">
+
+                        System Manager
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- CARDS -->
 
         <div class="row g-4">
 
-            <!-- Sales -->
+            <div class="col-lg-3 col-md-6">
 
-            <div class="col-md-3">
+                <div class="dashboard-card sales-card">
 
-                <div class="card-box sales-card">
+                    <i class="bi bi-currency-dollar"></i>
 
                     <h5>Total Sales</h5>
 
@@ -312,11 +731,11 @@
 
             </div>
 
-            <!-- Products -->
+            <div class="col-lg-3 col-md-6">
 
-            <div class="col-md-3">
+                <div class="dashboard-card product-card">
 
-                <div class="card-box product-card">
+                    <i class="bi bi-box-fill"></i>
 
                     <h5>Total Products</h5>
 
@@ -330,11 +749,11 @@
 
             </div>
 
-            <!-- Production -->
+            <div class="col-lg-3 col-md-6">
 
-            <div class="col-md-3">
+                <div class="dashboard-card production-card">
 
-                <div class="card-box production-card">
+                    <i class="bi bi-building-fill"></i>
 
                     <h5>Production Entries</h5>
 
@@ -348,11 +767,11 @@
 
             </div>
 
-            <!-- Stock -->
+            <div class="col-lg-3 col-md-6">
 
-            <div class="col-md-3">
+                <div class="dashboard-card stock-card">
 
-                <div class="card-box stock-card">
+                    <i class="bi bi-stack"></i>
 
                     <h5>Total Stock</h5>
 
@@ -368,192 +787,244 @@
 
         </div>
 
-        <!-- PENDING PRODUCTION -->
+        <!-- PENDING TABLE -->
 
-        <div class="table-box">
+        <div class="table-card">
 
-            <h3 class="mb-4">
+            <h3 class="table-title">
 
                 Pending Production Approval
 
             </h3>
 
-            <table class="table table-bordered">
+            <div class="table-responsive">
 
-                <tr>
+                <table class="table align-middle">
 
-                    <th>
-                        Date
-                    </th>
+                    <thead>
 
-                    <th>
-                        Product
-                    </th>
+                        <tr>
 
-                    <th>
-                        Bag Count
-                    </th>
+                            <th>Date</th>
 
-                    <th>
-                        Status
-                    </th>
+                            <th>Product</th>
 
-                    <th>
-                        Action
-                    </th>
+                            <th>Bag Count</th>
 
-                </tr>
+                            <th>Status</th>
 
-                {% for production in pending_productions %}
+                            <th>Action</th>
 
-                <tr>
+                        </tr>
 
-                    <td>
+                    </thead>
 
-                        {{ production.date }}
+                    <tbody>
 
-                    </td>
+                        {% for production in pending_productions %}
 
-                    <td>
+                        <tr>
 
-                        {{ production.product.name }}
+                            <td>
 
-                    </td>
+                                {{ production.date }}
 
-                    <td>
+                            </td>
 
-                        {{ production.bag_count }}
+                            <td>
 
-                    </td>
+                                {{ production.product.name }}
 
-                    <td>
+                            </td>
 
-                        <span class="pending-badge">
+                            <td>
 
-                            Pending
+                                {{ production.bag_count }}
 
-                        </span>
+                            </td>
 
-                    </td>
+                            <td>
 
-                    <td>
+                                <span class="badge-pending">
 
-                        <a href="/approve-production/{{ production.id }}"
-                           class="approve-btn">
+                                    Pending
 
-                            Approve
+                                </span>
 
-                        </a>
+                            </td>
 
-                    </td>
+                            <td>
 
-                </tr>
+                                <a href="/approve-production/{{ production.id }}"
+                                   class="approve-btn">
 
-                {% empty %}
+                                    Approve
 
-                <tr>
+                                </a>
 
-                    <td colspan="5">
+                            </td>
 
-                        No Pending Productions
+                        </tr>
 
-                    </td>
+                        {% empty %}
 
-                </tr>
+                        <tr>
 
-                {% endfor %}
+                            <td colspan="5"
+                                class="text-center">
 
-            </table>
+                                No Pending Productions
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
-        <!-- APPROVED PRODUCTIONS -->
+        <!-- APPROVED TABLE -->
 
-        <div class="table-box">
+        <div class="table-card">
 
-            <h3 class="mb-4">
+            <h3 class="table-title">
 
                 Approved Productions
 
             </h3>
 
-            <table class="table table-bordered">
+            <div class="table-responsive">
 
-                <tr>
+                <table class="table align-middle">
 
-                    <th>
-                        Date
-                    </th>
+                    <thead>
 
-                    <th>
-                        Product
-                    </th>
+                        <tr>
 
-                    <th>
-                        Bag Count
-                    </th>
+                            <th>Date</th>
 
-                    <th>
-                        Status
-                    </th>
+                            <th>Product</th>
 
-                </tr>
+                            <th>Bag Count</th>
 
-                {% for production in approved_productions %}
+                            <th>Status</th>
 
-                <tr>
+                            <th>Action</th>
 
-                    <td>
+                        </tr>
 
-                        {{ production.date }}
+                    </thead>
 
-                    </td>
+                    <tbody>
 
-                    <td>
+                        {% for production in approved_productions %}
 
-                        {{ production.product.name }}
+                        <tr>
 
-                    </td>
+                            <td>
 
-                    <td>
+                                {{ production.date }}
 
-                        {{ production.bag_count }}
+                            </td>
 
-                    </td>
+                            <td>
 
-                    <td>
+                                {{ production.product.name }}
 
-                        <span class="approved-badge">
+                            </td>
 
-                            Approved
+                            <td>
 
-                        </span>
+                                {{ production.bag_count }}
 
-                    </td>
+                            </td>
 
-                </tr>
+                            <td>
 
-                {% empty %}
+                                <span class="badge-approved">
 
-                <tr>
+                                    Approved
 
-                    <td colspan="4">
+                                </span>
 
-                        No Approved Productions
+                            </td>
 
-                    </td>
+                            <td>
 
-                </tr>
+                                <!-- EDIT -->
 
-                {% endfor %}
+                                <a href="/edit-production/{{ production.id }}"
+                                   class="btn btn-primary btn-sm">
 
-            </table>
+                                    <i class="bi bi-pencil-square"></i>
+
+                                    Edit
+
+                                </a>
+
+                                <!-- DELETE -->
+
+                                <a href="/delete-production/{{ production.id }}"
+                                   class="btn btn-danger btn-sm"
+                                   onclick="return confirm('Are you sure to delete this production?')">
+
+                                    <i class="bi bi-trash"></i>
+
+                                    Delete
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="5"
+                                class="text-center">
+
+                                No Approved Productions
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
         </div>
 
     </div>
 
-    <!-- Bootstrap JS -->
+    <!-- JS -->
+
+    <script>
+
+        function toggleSidebar(){
+
+            document
+            .getElementById("sidebar")
+            .classList
+            .toggle("active");
+
+        }
+
+    </script>
+
+    <!-- Bootstrap -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
