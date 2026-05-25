@@ -45,11 +45,23 @@ def admin_login(request):
 
         )
 
-        if user is not None and user.username == 'CM_Admin':
+        if user is not None:
 
-            login(request, user)
+            if user.username == 'cm_admin':
 
-            return redirect('/dashboard')
+                login(request, user)
+
+                return redirect('/dashboard')
+
+            else:
+
+                messages.error(
+
+                    request,
+
+                    'You are not Admin'
+
+                )
 
         else:
 
@@ -92,11 +104,23 @@ def sales_login(request):
 
         )
 
-        if user is not None and user.username == 'CM_Sales':
+        if user is not None:
 
-            login(request, user)
+            if user.username == 'cm_sales':
 
-            return redirect('/sales')
+                login(request, user)
+
+                return redirect('/sales')
+
+            else:
+
+                messages.error(
+
+                    request,
+
+                    'You are not Sales User'
+
+                )
 
         else:
 
@@ -139,11 +163,23 @@ def manufacture_login(request):
 
         )
 
-        if user is not None and user.username == 'CM_PR':
+        if user is not None:
 
-            login(request, user)
+            if user.username == 'cm_pr':
 
-            return redirect('/production')
+                login(request, user)
+
+                return redirect('/production')
+
+            else:
+
+                messages.error(
+
+                    request,
+
+                    'You are not Manufacture User'
+
+                )
 
         else:
 
@@ -162,8 +198,6 @@ def manufacture_login(request):
         'manufacture_login.html'
 
     )
-
-
 # =========================================
 # LOGOUT
 # =========================================
@@ -185,13 +219,14 @@ def sales_page(request):
 
     if (
 
-        request.user.username != 'CM_Sales'
+        request.user.username != 'cm_sales'
 
         and
 
-        request.user.username != 'CM_Admin'
+        request.user.username != 'cm_admin'
 
     ):
+        
 
         return HttpResponseForbidden(
 
@@ -261,6 +296,15 @@ def sales_page(request):
 
         )
 
+        if product.stock < int(bag_count):
+
+            messages.error(
+                request,
+                'Not Enough Stock'
+            )
+
+            return redirect('/sales')
+
         Sale.objects.create(
 
             bill_no='',
@@ -294,6 +338,9 @@ def sales_page(request):
             due=float(due)
 
         )
+
+        product.stock -= int(bag_count)
+        product.save()
 
         messages.success(
 
@@ -329,11 +376,11 @@ def sales_details(request):
 
     if (
 
-        request.user.username != 'CM_Sales'
+        request.user.username != 'cm_sales'
 
         and
 
-        request.user.username != 'CM_Admin'
+        request.user.username != 'cm_admin'
 
     ):
 
@@ -383,11 +430,11 @@ def edit_sale(request, id):
 
     if (
 
-        request.user.username != 'CM_Sales'
+        request.user.username != 'cm_sales'
 
         and
 
-        request.user.username != 'CM_Admin'
+        request.user.username != 'cm_admin'
 
     ):
 
@@ -519,11 +566,11 @@ def delete_sale(request, id):
 
     if (
 
-        request.user.username != 'CM_Sales'
+        request.user.username != 'cm_sales'
 
         and
 
-        request.user.username != 'CM_Admin'
+        request.user.username != 'cm_admin'
 
     ):
 
@@ -580,9 +627,9 @@ def stock_overview(request):
 def production_page(request):
 
     if (
-        request.user.username != 'CM_PR'
+        request.user.username != 'cm_pr'
         and
-        request.user.username != 'CM_Admin'
+        request.user.username != 'cm_admin'
     ):
 
         return HttpResponseForbidden(
@@ -649,7 +696,7 @@ def production_page(request):
 @login_required
 def approve_production(request, id):
 
-    if request.user.username != 'CM_Admin':
+    if request.user.username != 'cm_admin':
 
         return HttpResponseForbidden(
 
@@ -687,7 +734,7 @@ def approve_production(request, id):
 @login_required
 def edit_production(request, id):
 
-    if request.user.username != 'CM_Admin':
+    if request.user.username != 'cm_admin':
 
         return HttpResponseForbidden(
 
@@ -765,7 +812,7 @@ def edit_production(request, id):
 @login_required
 def delete_production(request, id):
 
-    if request.user.username != 'CM_Admin':
+    if request.user.username != 'cm_admin':
 
         return HttpResponseForbidden(
 
@@ -797,11 +844,11 @@ def raw_material(request):
 
     if (
 
-        request.user.username != 'CM_PR'
+        request.user.username != 'cm_pr'
 
         and
 
-        request.user.username != 'CM_Admin'
+        request.user.username != 'cm_admin'
 
     ):
 
@@ -893,11 +940,11 @@ def edit_material(request, id):
 
     if (
 
-        request.user.username != 'CM_PR'
+        request.user.username != 'cm_pr'
 
         and
 
-        request.user.username != 'CM_Admin'
+        request.user.username != 'cm_admin'
 
     ):
 
@@ -971,11 +1018,11 @@ def delete_material(request, id):
 
     if (
 
-        request.user.username != 'CM_PR'
+        request.user.username != 'cm_pr'
 
         and
 
-        request.user.username != 'CM_Admin'
+        request.user.username != 'cm_admin'
 
     ):
 
@@ -1007,7 +1054,7 @@ def delete_material(request, id):
 @login_required
 def admin_dashboard(request):
 
-    if request.user.username != 'CM_Admin':
+    if request.user.username != 'cm_admin':
 
         return HttpResponseForbidden(
 
