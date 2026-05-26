@@ -12,14 +12,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # -------------------
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-dev-key')
 
-DEBUG = os.getenv('DEBUG', 'False') == 'True'
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = [
+    'cm-feed-erp-1.onrender.com',
     '.onrender.com',
     'localhost',
     '127.0.0.1'
 ]
-
 # -------------------
 # APPS
 # -------------------
