@@ -1,19 +1,20 @@
 from django import forms
-from .models import *
+from .models import Bill, SaleItem
 
 
-class SaleForm(forms.ModelForm):
+class BillForm(forms.ModelForm):
 
     class Meta:
-        model = Sale
+
+        model = Bill
 
         fields = '__all__'
 
 
-class ProductionForm(forms.ModelForm):
+class SaleItemForm(forms.ModelForm):
 
     class Meta:
-        model = Production
+
+        model = SaleItem
 
         fields = '__all__'
-
