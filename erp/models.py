@@ -21,15 +21,18 @@ class Product(models.Model):
 
 
 # =========================================
-# SALES MODEL
+# SALES BILL MODEL
 # =========================================
 
-class Sale(models.Model):
+# =========================================
+# BILL MODEL
+# =========================================
+
+class Bill(models.Model):
 
     bill_no = models.CharField(
         max_length=100,
-        unique=True,
-        blank=True
+        unique=True
     )
 
     date = models.DateField()
@@ -58,15 +61,6 @@ class Sale(models.Model):
 
     address = models.TextField()
 
-    product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE
-    )
-
-    bag_count = models.IntegerField()
-
-    unit_price = models.FloatField()
-
     collected_payment = models.FloatField(
         default=0
     )
@@ -75,66 +69,88 @@ class Sale(models.Model):
         default=0
     )
 
-    total_price = models.FloatField(
-        blank=True,
-        null=True
+    total_amount = models.FloatField(
+        default=0
     )
 
     created_at = models.DateTimeField(
         auto_now_add=True
     )
 
-    updated_at = models.DateTimeField(
-        auto_now=True
+    def __str__(self):
+
+        return self.bill_no
+
+
+# =========================================
+# SALES ITEM MODEL
+# =========================================
+
+class SaleItem(models.Model):
+
+    bill = models.ForeignKey(
+
+        Bill,
+
+        on_delete=models.CASCADE,
+
+        related_name='items'
+
     )
+
+    product = models.ForeignKey(
+
+        Product,
+
+        on_delete=models.CASCADE
+
+    )
+
+    bag_count = models.IntegerField()
+
+    unit_price = models.FloatField()
+
+    total_price = models.FloatField()
 
     def save(self, *args, **kwargs):
 
-        # TOTAL PRICE
-        self.total_price = (
-            int(self.bag_count) *
-            float(self.unit_price)
-        )
-
-        # AUTO BILL NUMBER
-        if not self.bill_no:
-
-            last_sale = Sale.objects.order_by(
-                '-id'
-            ).first()
-
-            if last_sale:
-                new_id = last_sale.id + 1
-            else:
-                new_id = 1
-
-            self.bill_no = f"CM_{new_id:04d}"
-
-        # STOCK CHECK ONLY FOR NEW SALE
         if self.pk is None:
 
-            if self.product.stock >= int(
-                self.bag_count
-            ):
+            if self.product.stock >= self.bag_count:
 
-                self.product.stock -= int(
-                    self.bag_count
-                )
+                self.product.stock -= self.bag_count
 
                 self.product.save()
 
             else:
 
                 raise ValueError(
+
                     "Insufficient Stock"
+
                 )
+
+        self.total_price = (
+
+            self.bag_count *
+
+            self.unit_price
+
+        )
 
         super().save(*args, **kwargs)
 
     def __str__(self):
 
-        return self.bill_no
+        return (
 
+            f"{self.bill.bill_no}"
+
+            f" - "
+
+            f"{self.product.name}"
+
+        )
 
 # =========================================
 # PRODUCTION MODEL

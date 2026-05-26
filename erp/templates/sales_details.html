@@ -45,509 +45,303 @@
         }
 
         body{
-
             background:#f8fafc;
-
             font-family:'Inter',sans-serif;
-
             color:#0f172a;
-
-            overflow-x:auto;
-
+            overflow-x:hidden;
         }
 
         .main-container{
-
             padding:35px;
-
         }
 
         .top-bar{
-
             display:flex;
-
             justify-content:space-between;
-
             align-items:center;
-
             gap:20px;
-
             flex-wrap:wrap;
-
             margin-bottom:30px;
-
         }
 
         .title{
-
             font-size:38px;
-
             font-weight:800;
-
             color:#0f172a;
-
             margin-bottom:8px;
-
         }
 
         .subtitle{
-
             color:#64748b;
-
             font-size:15px;
-
             margin:0;
-
         }
 
         .header-actions{
-
             display:flex;
-
             gap:14px;
-
             flex-wrap:wrap;
-
         }
 
         .top-btn{
-
             display:flex;
-
             align-items:center;
-
             gap:10px;
-
             padding:14px 22px;
-
             border-radius:18px;
-
             text-decoration:none;
-
             color:white;
-
             font-weight:700;
-
             transition:0.3s ease;
-
             font-size:14px;
-
         }
 
         .new-btn{
-
-            background:
-            linear-gradient(
+            background:linear-gradient(
                 135deg,
                 #2563eb,
                 #3b82f6
             );
-
         }
 
         .download-btn{
-
-            background:
-            linear-gradient(
+            background:linear-gradient(
                 135deg,
                 #16a34a,
                 #22c55e
             );
-
         }
 
         .top-btn:hover{
-
             transform:translateY(-3px);
-
             color:white;
-
         }
 
         .card-box{
-
             background:white;
-
             border-radius:28px;
-
             padding:30px;
-
             margin-bottom:28px;
-
             border:1px solid #e2e8f0;
-
             box-shadow:
             0px 12px 35px rgba(15,23,42,0.05);
-
         }
 
         .alert{
-
             border:none;
-
             border-radius:18px;
-
             padding:15px;
-
             font-size:14px;
-
         }
 
         .summary-card{
-
             display:flex;
-
             align-items:center;
-
             justify-content:space-between;
-
             gap:20px;
-
             flex-wrap:wrap;
-
         }
 
         .summary-left{
-
             display:flex;
-
             align-items:center;
-
             gap:18px;
-
         }
 
         .summary-icon{
-
             width:75px;
-
             height:75px;
-
             border-radius:24px;
-
-            background:
-            linear-gradient(
+            background:linear-gradient(
                 135deg,
                 #16a34a,
                 #22c55e
             );
-
             display:flex;
-
             justify-content:center;
-
             align-items:center;
-
             color:white;
-
             font-size:30px;
-
         }
 
         .summary-title{
-
             font-size:17px;
-
             color:#64748b;
-
             margin-bottom:4px;
-
         }
 
         .summary-count{
-
             font-size:38px;
-
             font-weight:800;
-
             color:#0f172a;
-
         }
 
         .input-group-text{
-
             background:white;
-
             border:1px solid #cbd5e1;
-
             border-right:none;
-
             border-radius:16px 0px 0px 16px;
-
             color:#2563eb;
-
             padding:0px 16px;
-
         }
 
         .form-control{
-
             height:56px;
-
             border:1px solid #cbd5e1;
-
             border-left:none;
-
             border-radius:0px 16px 16px 0px;
-
             font-size:15px;
-
         }
 
         .form-control:focus{
-
             border-color:#60a5fa;
-
             box-shadow:none;
-
         }
 
         .search-btn{
-
             width:100%;
-
             height:56px;
-
             border:none;
-
             border-radius:18px;
-
-            background:
-            linear-gradient(
+            background:linear-gradient(
                 135deg,
                 #0f172a,
                 #1e293b
             );
-
             color:white;
-
             font-weight:700;
-
-        }
-
-        .search-btn:hover{
-
-            opacity:0.95;
-
         }
 
         .table-responsive{
-
             border-radius:24px;
-
             overflow:auto;
-
             border:1px solid #e2e8f0;
-
         }
 
         .table{
-
             margin:0;
-
-            min-width:1900px;
-
+            min-width:1800px;
         }
 
-        /* HEADER FIX */
-
         .table thead{
-
-            background:
-            linear-gradient(
+            background:linear-gradient(
                 135deg,
                 #0f172a,
                 #1e293b
             );
-
-            position:sticky;
-
-            top:0;
-
-            z-index:10;
-
         }
 
         .table th{
-
             color:#ffffff !important;
-
-            padding:20px 16px;
-
-            font-size:14px;
-
+            padding:18px 14px;
+            font-size:13px;
             font-weight:800;
-
             text-align:center;
-
             border:none;
-
             white-space:nowrap;
-
-            letter-spacing:0.4px;
-
-            text-transform:uppercase;
-
             background:transparent !important;
-
             vertical-align:middle;
-
         }
 
         .table td{
-
-            padding:18px 14px;
-
+            padding:16px 12px;
             text-align:center;
-
             vertical-align:middle;
-
             border-color:#f1f5f9;
-
             font-size:14px;
-
             white-space:nowrap;
-
             background:white;
-
-        }
-
-        .table tbody tr{
-
-            transition:0.3s ease;
-
         }
 
         .table tbody tr:hover{
-
             background:#f8fafc;
-
-            transform:scale(1.001);
-
         }
 
         .bill-badge{
-
             background:#dcfce7;
-
             color:#166534;
-
             padding:10px 16px;
-
             border-radius:30px;
-
             font-weight:700;
-
             display:inline-block;
-
             font-size:13px;
-
         }
 
         .money-badge{
-
             background:#dbeafe;
-
             color:#1d4ed8;
-
             padding:9px 15px;
-
             border-radius:30px;
-
             font-weight:700;
-
             display:inline-block;
-
             font-size:13px;
+        }
 
+        .product-box{
+            text-align:left;
+            line-height:1.8;
+        }
+
+        .product-box b{
+            color:#0f172a;
         }
 
         .action-btn{
-
             padding:10px 14px;
-
             border-radius:12px;
-
             text-decoration:none;
-
             color:white;
-
             font-size:13px;
-
             font-weight:700;
-
             transition:0.3s ease;
-
+            display:inline-flex;
+            align-items:center;
+            gap:6px;
         }
 
         .edit-btn{
-
             background:#f59e0b;
-
         }
 
         .delete-btn{
-
             background:#dc2626;
-
         }
 
         .action-btn:hover{
-
             color:white;
-
             transform:translateY(-2px);
-
         }
 
         .empty-box{
-
             padding:35px;
-
             color:#64748b;
-
             text-align:center;
-
             font-size:15px;
-
             font-weight:600;
-
         }
 
         @media(max-width:768px){
 
             .main-container{
-
                 padding:18px;
-
             }
 
             .title{
-
                 font-size:28px;
-
             }
 
             .card-box{
-
                 padding:20px;
-
             }
 
             .top-bar{
-
                 flex-direction:column;
-
                 align-items:flex-start;
-
             }
 
             .top-btn{
-
                 width:100%;
-
                 justify-content:center;
-
             }
 
         }
@@ -586,22 +380,18 @@
         <div>
 
             <h1 class="title">
-
                 Sales Details
-
             </h1>
 
             <p class="subtitle">
-
                 Manage and monitor all sales records easily
-
             </p>
 
         </div>
 
         <div class="header-actions">
 
-            <a href="/sales"
+            <a href="/sales/"
                class="top-btn new-btn">
 
                 <i class="bi bi-plus-circle-fill"></i>
@@ -638,15 +428,11 @@
             <div>
 
                 <div class="summary-title">
-
                     Total Sales Records
-
                 </div>
 
                 <div class="summary-count">
-
-                    {{ sales|length }}
-
+                    {{ bills|length }}
                 </div>
 
             </div>
@@ -721,13 +507,13 @@
 
                         <th>Mobile</th>
 
-                        <th>Customer Name</th>
+                        <th>Customer</th>
 
                         <th>Sales Person</th>
 
                         <th>Address</th>
 
-                        <th>Product</th>
+                        <th>Products</th>
 
                         <th>Bags</th>
 
@@ -735,9 +521,9 @@
 
                         <th>Total Price</th>
 
-                        <th>Collected Payment</th>
+                        <th>Collected</th>
 
-                        <th>Due Amount</th>
+                        <th>Due</th>
 
                         <th>Actions</th>
 
@@ -747,55 +533,147 @@
 
                 <tbody>
 
-                    {% for i in sales %}
+                    {% for bill in bills %}
 
                     <tr>
 
                         <td>
+
                             <span class="bill-badge">
-                                {{ i.bill_no }}
+
+                                #{{ bill.bill_no }}
+
                             </span>
+
                         </td>
 
-                        <td>{{ i.date }}</td>
+                        <td>{{ bill.date }}</td>
 
-                        <td>{{ i.rd_name }}</td>
+                        <td>{{ bill.rd_name }}</td>
 
-                        <td>{{ i.retail_partner }}</td>
+                        <td>{{ bill.retail_partner }}</td>
 
-                        <td>{{ i.mobile }}</td>
+                        <td>{{ bill.mobile }}</td>
 
-                        <td>{{ i.customer_name }}</td>
+                        <td>{{ bill.customer_name }}</td>
 
-                        <td>{{ i.sales_person_name }}</td>
+                        <td>{{ bill.sales_person_name }}</td>
 
-                        <td>{{ i.address }}</td>
+                        <td>{{ bill.address }}</td>
 
-                        <td>{{ i.product.name }}</td>
-
-                        <td>{{ i.bag_count }}</td>
-
-                        <td>₹ {{ i.unit_price }}</td>
-
-                        <td>₹ {{ i.total_price }}</td>
+                        <!-- PRODUCTS -->
 
                         <td>
-                            <span class="money-badge">
-                                ₹ {{ i.collected_payment }}
-                            </span>
+
+                            <div class="product-box">
+
+                                {% for item in bill.items.all %}
+
+                                    <div class="mb-2">
+
+                                        <b>
+                                            {{ item.product.name }}
+                                        </b>
+
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
                         </td>
 
+                        <!-- BAGS -->
+
                         <td>
-                            <span class="money-badge">
-                                ₹ {{ i.due }}
-                            </span>
+
+                            <div class="product-box">
+
+                                {% for item in bill.items.all %}
+
+                                    <div class="mb-2">
+
+                                        {{ item.bag_count }} Bags
+
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
                         </td>
+
+                        <!-- UNIT PRICE -->
+
+                        <td>
+
+                            <div class="product-box">
+
+                                {% for item in bill.items.all %}
+
+                                    <div class="mb-2">
+
+                                        ₹ {{ item.unit_price }}
+
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </td>
+
+                        <!-- TOTAL PRICE -->
+
+                        <td>
+
+                            <div class="product-box">
+
+                                {% for item in bill.items.all %}
+
+                                    <div class="mb-2">
+
+                                        ₹ {{ item.total_price }}
+
+                                    </div>
+
+                                {% endfor %}
+
+                            </div>
+
+                        </td>
+
+                        <!-- COLLECTED -->
+
+                        <td>
+
+                            <span class="money-badge">
+
+                                ₹ {{ bill.collected_payment }}
+
+                            </span>
+
+                        </td>
+
+                        <!-- DUE -->
+
+                        <td>
+
+                            <span class="money-badge">
+
+                                ₹ {{ bill.due }}
+
+                            </span>
+
+                        </td>
+
+                        <!-- ACTIONS -->
 
                         <td>
 
                             <div class="d-flex justify-content-center gap-2 flex-wrap">
 
-                                <a href="/edit-sale/{{ i.id }}/"
+                                <a href="/edit-sale/{{ bill.id }}/"
                                    class="action-btn edit-btn">
 
                                     <i class="bi bi-pencil-square"></i>
@@ -804,7 +682,7 @@
 
                                 </a>
 
-                                <a href="/delete-sale/{{ i.id }}/"
+                                <a href="/delete-sale/{{ bill.id }}/"
                                    class="action-btn delete-btn"
                                    onclick="return confirm('Are you sure to delete this sale?')">
 

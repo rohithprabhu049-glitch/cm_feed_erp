@@ -9,8 +9,13 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
-from .models import *
-
+from .models import (
+    Product,
+    Bill,
+    SaleItem,
+    Production,
+    RawMaterial
+)
 import pandas as pd
 
 
@@ -226,7 +231,6 @@ def sales_page(request):
         request.user.username != 'cm_admin'
 
     ):
-        
 
         return HttpResponseForbidden(
 
@@ -238,76 +242,45 @@ def sales_page(request):
 
     if request.method == 'POST':
 
+        import random
+
+        bill_no = f"BILL-{random.randint(1000,9999)}"
+
         date = request.POST.get('date')
 
         rd_name = request.POST.get('rd_name')
 
         retail_partner = request.POST.get(
-
             'retail_partner'
-
         )
 
         mobile = request.POST.get('mobile')
 
         customer_name = request.POST.get(
-
             'customer_name'
-
         )
 
         sales_person_name = request.POST.get(
-
             'sales_person_name'
-
         )
 
         address = request.POST.get('address')
 
-        collected_payment = request.POST.get(
-
-            'collected_payment'
-
+        collected_payment = float(
+            request.POST.get(
+                'collected_payment'
+            ) or 0
         )
 
-        due = request.POST.get('due')
-
-        product_id = request.POST.get(
-
-            'product'
-
+        due = float(
+            request.POST.get('due') or 0
         )
 
-        bag_count = request.POST.get(
+        # CREATE BILL
 
-            'bag_count'
+        bill = Bill.objects.create(
 
-        )
-
-        unit_price = request.POST.get(
-
-            'unit_price'
-
-        )
-
-        product = Product.objects.get(
-
-            id=product_id
-
-        )
-
-        if product.stock < int(bag_count):
-
-            messages.error(
-                request,
-                'Not Enough Stock'
-            )
-
-            return redirect('/sales')
-
-        Sale.objects.create(
-
-            bill_no='',
+            bill_no=bill_no,
 
             date=date,
 
@@ -323,24 +296,54 @@ def sales_page(request):
 
             address=address,
 
-            product=product,
+            collected_payment=collected_payment,
 
-            bag_count=int(bag_count),
-
-            unit_price=float(unit_price),
-
-            collected_payment=float(
-
-                collected_payment
-
-            ),
-
-            due=float(due)
+            due=due
 
         )
 
-        product.stock -= int(bag_count)
-        product.save()
+        # SAVE PRODUCTS
+
+        for i in range(1, 4):
+
+            product_id = request.POST.get(
+                f'product{i}'
+            )
+
+            bag_count = request.POST.get(
+                f'bag{i}'
+            )
+
+            unit_price = request.POST.get(
+                f'price{i}'
+            )
+
+            if product_id and bag_count and unit_price:
+
+                product = Product.objects.get(
+                    id=product_id
+                )
+
+                if product.stock < int(bag_count):
+
+                    messages.error(
+                        request,
+                        f'Not Enough Stock For {product.name}'
+                    )
+
+                    return redirect('/sales')
+
+                SaleItem.objects.create(
+
+                    bill=bill,
+
+                    product=product,
+
+                    bag_count=int(bag_count),
+
+                    unit_price=float(unit_price)
+
+                )
 
         messages.success(
 
@@ -392,11 +395,11 @@ def sales_details(request):
 
     query = request.GET.get('q')
 
-    sales = Sale.objects.all().order_by('-id')
+    bills = Bill.objects.all().order_by('-id')
 
     if query:
 
-        sales = sales.filter(
+        bills = bills.filter(
 
             Q(rd_name__icontains=query) |
 
@@ -414,187 +417,11 @@ def sales_details(request):
 
         {
 
-            'sales': sales
+            'bills': bills
 
         }
 
     )
-
-
-# =========================================
-# EDIT SALE
-# =========================================
-
-@login_required
-def edit_sale(request, id):
-
-    if (
-
-        request.user.username != 'cm_sales'
-
-        and
-
-        request.user.username != 'cm_admin'
-
-    ):
-
-        return HttpResponseForbidden(
-
-            "Sales/Admin Access Only"
-
-        )
-
-    sale = Sale.objects.get(id=id)
-
-    products = Product.objects.all()
-
-    if request.method == 'POST':
-
-        sale.date = request.POST.get('date')
-
-        sale.rd_name = request.POST.get(
-
-            'rd_name'
-
-        )
-
-        sale.retail_partner = request.POST.get(
-
-            'retail_partner'
-
-        )
-
-        sale.mobile = request.POST.get(
-
-            'mobile'
-
-        )
-
-        sale.customer_name = request.POST.get(
-
-            'customer_name'
-
-        )
-
-        sale.sales_person_name = request.POST.get(
-
-            'sales_person_name'
-
-        )
-
-        sale.address = request.POST.get(
-
-            'address'
-
-        )
-
-        sale.collected_payment = float(
-
-            request.POST.get(
-
-                'collected_payment'
-
-            )
-
-        )
-
-        sale.due = float(
-
-            request.POST.get('due')
-
-        )
-
-        product_id = request.POST.get(
-
-            'product'
-
-        )
-
-        sale.product = Product.objects.get(
-
-            id=product_id
-
-        )
-
-        sale.bag_count = int(
-
-            request.POST.get('bag_count')
-
-        )
-
-        sale.unit_price = float(
-
-            request.POST.get('unit_price')
-
-        )
-
-        sale.save()
-
-        messages.success(
-
-            request,
-
-            'Sale Updated Successfully'
-
-        )
-
-        return redirect('/sales-details')
-
-    return render(
-
-        request,
-
-        'edit_sale.html',
-
-        {
-
-            'sale': sale,
-
-            'products': products
-
-        }
-
-    )
-
-
-# =========================================
-# DELETE SALE
-# =========================================
-
-@login_required
-def delete_sale(request, id):
-
-    if (
-
-        request.user.username != 'cm_sales'
-
-        and
-
-        request.user.username != 'cm_admin'
-
-    ):
-
-        return HttpResponseForbidden(
-
-            "Sales/Admin Access Only"
-
-        )
-
-    sale = Sale.objects.get(id=id)
-
-    sale.delete()
-
-    messages.success(
-
-        request,
-
-        'Sale Deleted Successfully'
-
-    )
-
-    return redirect('/sales-details')
-
-
 # =========================================
 # STOCK OVERVIEW
 # =========================================
@@ -618,6 +445,166 @@ def stock_overview(request):
 
     )
 
+
+# =========================================
+# EDIT SALE
+# =========================================
+
+@login_required
+def edit_sale(request, id):
+
+    if (
+        request.user.username != 'cm_sales'
+        and
+        request.user.username != 'cm_admin'
+    ):
+
+        return HttpResponseForbidden(
+            "Sales/Admin Access Only"
+        )
+
+    bill = Bill.objects.get(id=id)
+
+    item = bill.items.first()
+
+    products = Product.objects.all()
+
+    if request.method == 'POST':
+
+        # UPDATE BILL DETAILS
+        bill.date = request.POST.get('date')
+        bill.rd_name = request.POST.get('rd_name')
+        bill.retail_partner = request.POST.get('retail_partner')
+        bill.mobile = request.POST.get('mobile')
+        bill.address = request.POST.get('address')
+
+        # NEW VALUES
+        product_id = request.POST.get('product')
+        new_bag_count = int(request.POST.get('bag_count'))
+        unit_price = float(request.POST.get('unit_price'))
+
+        new_product = Product.objects.get(id=product_id)
+
+        # OLD VALUES
+        old_product = item.product
+        old_bag_count = item.bag_count
+
+        # SAME PRODUCT
+        if old_product.id == new_product.id:
+
+            difference = new_bag_count - old_bag_count
+
+            # INCREASE
+            if difference > 0:
+
+                if old_product.stock < difference:
+
+                    messages.error(
+                        request,
+                        f'Not Enough Stock For {old_product.name}'
+                    )
+
+                    return redirect(f'/edit-sale/{bill.id}/')
+
+                old_product.stock -= difference
+
+            # DECREASE
+            elif difference < 0:
+
+                old_product.stock += abs(difference)
+
+            old_product.save()
+
+        else:
+
+            # RETURN OLD STOCK
+            old_product.stock += old_bag_count
+            old_product.save()
+
+            # CHECK NEW PRODUCT STOCK
+            if new_product.stock < new_bag_count:
+
+                # REVERT
+                old_product.stock -= old_bag_count
+                old_product.save()
+
+                messages.error(
+                    request,
+                    f'Not Enough Stock For {new_product.name}'
+                )
+
+                return redirect(f'/edit-sale/{bill.id}/')
+
+            # DEDUCT NEW PRODUCT STOCK
+            new_product.stock -= new_bag_count
+            new_product.save()
+
+        # UPDATE ITEM
+        item.product = new_product
+        item.bag_count = new_bag_count
+        item.unit_price = unit_price
+        item.total_price = new_bag_count * unit_price
+        item.save()
+
+        # UPDATE BILL
+        bill.total_amount = item.total_price
+        bill.save()
+
+        messages.success(
+            request,
+            'Sale Updated Successfully'
+        )
+
+        return redirect('/sales-details/')
+
+    return render(
+        request,
+        'edit_sale.html',
+        {
+            'bill': bill,
+            'item': item,
+            'products': products
+        }
+    )
+# =========================================
+# DELETE SALE
+# =========================================
+
+@login_required
+def delete_sale(request, id):
+
+    if (
+
+        request.user.username != 'cm_sales'
+
+        and
+
+        request.user.username != 'cm_admin'
+
+    ):
+
+        return HttpResponseForbidden(
+
+            "Sales/Admin Access Only"
+
+        )
+
+    bill = Bill.objects.get(id=id)
+
+    # DELETE SALE ONLY
+    # STOCK WILL NOT RETURN
+
+    bill.delete()
+
+    messages.success(
+
+        request,
+
+        'Sale Deleted Successfully'
+
+    )
+
+    return redirect('/sales-details')
 
 # =========================================
 # PRODUCTION PAGE
@@ -1062,7 +1049,7 @@ def admin_dashboard(request):
 
         )
 
-    total_sales = Sale.objects.count()
+    total_sales = Bill.objects.count()
 
     total_products = Product.objects.count()
 
@@ -1122,26 +1109,47 @@ def admin_dashboard(request):
 @login_required
 def export_sales_excel(request):
 
-    sales = Sale.objects.all().values(
+    data = []
 
-        'bill_no',
-        'date',
-        'rd_name',
-        'retail_partner',
-        'mobile',
-        'customer_name',
-        'sales_person_name',
-        'address',
-        'product_id',
-        'bag_count',
-        'unit_price',
-        'total_price',
-        'collected_payment',
-        'due'
+    bills = Bill.objects.all()
 
-    )
+    for bill in bills:
 
-    df = pd.DataFrame(sales)
+        for item in bill.items.all():
+
+            data.append({
+
+                'Bill No': bill.bill_no,
+
+                'Date': bill.date,
+
+                'RD Name': bill.rd_name,
+
+                'Retail Partner': bill.retail_partner,
+
+                'Mobile': bill.mobile,
+
+                'Customer Name': bill.customer_name,
+
+                'Sales Person': bill.sales_person_name,
+
+                'Address': bill.address,
+
+                'Product': item.product.name,
+
+                'Bag Count': item.bag_count,
+
+                'Unit Price': item.unit_price,
+
+                'Total Price': item.total_price,
+
+                'Collected Payment': bill.collected_payment,
+
+                'Due': bill.due
+
+            })
+
+    df = pd.DataFrame(data)
 
     response = HttpResponse(
 
